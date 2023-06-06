@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\PetLand.BAL\PetLand.BAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PetLand.BAL\PetLand.BAL.csproj" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
