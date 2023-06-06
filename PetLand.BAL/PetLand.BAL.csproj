@@ -11,4 +11,8 @@
     <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PetLand.DAL\PetLand.DAL.csproj" />
+  </ItemGroup>
+
 </Project>
