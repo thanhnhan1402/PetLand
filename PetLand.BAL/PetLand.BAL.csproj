@@ -7,20 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Services\Implements\**" />
-    <Compile Remove="Services\Interfaces\**" />
-    <EmbeddedResource Remove="Services\Implements\**" />
-    <EmbeddedResource Remove="Services\Interfaces\**" />
-    <None Remove="Services\Implements\**" />
-    <None Remove="Services\Interfaces\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PetLand.DAL\PetLand.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <Folder Include="Services\Implements\" />
   </ItemGroup>
 
 </Project>
