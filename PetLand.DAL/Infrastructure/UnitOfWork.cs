@@ -1,4 +1,8 @@
-﻿using PetLand.DAL.Entities;
+﻿using PetLand.BAL.Services.Implements;
+using PetLand.BAL.Services.Interfaces;
+using PetLand.DAL.Entities;
+using PetLand.DAL.Reponsitories.Implements;
+using PetLand.DAL.Reponsitories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,33 +13,28 @@ namespace DAL.Infrastructure
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IDbFactory _dbFactory;
-        private PetLandContext _dbContext;
-
-        public UnitOfWork(IDbFactory dbFactory)
+        private PetLandContext _context;
+        
+        public UnitOfWork(PetLandContext context)
         {
-            this._dbFactory = dbFactory;
+            _context = context;
+            Product = new ProductReponsitory(_context);
         }
 
-        public PetLandContext DbContext
+        public IProductReponsitory Product
         {
-            get
-            {
-                if (_dbContext == null)
-                {
-                    _dbContext = this._dbFactory.Init();
-                }
-                return _dbContext;
-            }
+            get;
+            private set;
         }
+
         public void Commit()
         {
-            DbContext.SaveChanges();    
+            throw new NotImplementedException();
         }
 
-        public async Task commitAsync()
+        public Task commitAsync()
         {
-            await DbContext.SaveChangesAsync();
+            throw new NotImplementedException();
         }
     }
 }

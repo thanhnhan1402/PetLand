@@ -12,15 +12,11 @@ using System.Globalization;
 
 namespace PetLand.DAL.Reponsitories.Implements
 {
-    public class ProductReponsitory : RepositoryBase<Product>, IProductReponsitory
+    public class ProductReponsitory : IProductReponsitory
     {
         private readonly PetLandContext _dbContext;
-        private readonly IUnitOfWork _unitOfWork;
-        public ProductReponsitory(IDbFactory dbFactory, IUnitOfWork unitOfWork) : base(dbFactory)
-        {
-            _dbContext = dbFactory.Init();
-            _unitOfWork = unitOfWork;
-        }
+        public ProductReponsitory(PetLandContext context) { _dbContext = context; }
+        
 
         public Task<Product> Add(Product product)
         {
@@ -46,13 +42,12 @@ namespace PetLand.DAL.Reponsitories.Implements
             }
             if (keyword == null && sortBy == null)
             {
-                result = _dbSet.Skip(PAGE_SIZE * (PAGE_NUMBER - 1)).Take(PAGE_SIZE);
+                result = _dbContext.Products.Skip(PAGE_SIZE * (PAGE_NUMBER - 1)).Take(PAGE_SIZE);
                 return result;
             }
             if (keyword != null && sortBy == null)
             {
-                result = _dbSet.Where(x => x.ProductName.Contains(keyword)).OrderByDescending(x => x.UnitPrice).Skip(PAGE_SIZE * (PAGE_NUMBER - 1)).Take(PAGE_SIZE);
-
+                result = _dbContext.Products.Where(x => x.ProductName.Contains(keyword)).OrderByDescending(x => x.UnitPrice).Skip(PAGE_SIZE * (PAGE_NUMBER - 1)).Take(PAGE_SIZE);
                 return result;
             }
             if (keyword == null && sortBy != null)
@@ -65,12 +60,19 @@ namespace PetLand.DAL.Reponsitories.Implements
                 result = SortSearch(keyword, sortBy, PAGE_SIZE, PAGE_NUMBER);
                 return result;
             }
-            return _dbSet.Where(x => x.ProductId == 0);
+            return _dbContext.Products.Where(x => x.ProductId == 0);
         }
 
-        public Task<Product> GetById(int id)
+        public IEnumerable<Product> GetAllProduct()
         {
-            throw new NotImplementedException();
+            var p = _dbContext.Products.ToList();
+            return p;
+        }
+
+        public Product GetById(int id)
+        {
+            var p = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
+            return p;
         }
 
         private IQueryable<Product> Sort(List<string> sortby, int PAGE_SIZE, int PAGE_NUMBER)

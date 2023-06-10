@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PetLand.BAL.Services.Interfaces;
+using PetLand.DAL.Reponsitories.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +12,9 @@ namespace DAL.Infrastructure
     {
         void Commit();
         Task commitAsync();
+        IProductReponsitory Product
+        {
+            get;
+        }
     }
 }

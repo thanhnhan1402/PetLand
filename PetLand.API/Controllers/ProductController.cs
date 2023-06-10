@@ -4,6 +4,7 @@ using PetLand.BAL.Models;
 using PetLand.DAL.Entities;
 using DAL.Infrastructure;
 using PetLand.BAL.Services.Interfaces;
+using PetLand.BAL.Services.Implements;
 
 namespace PetLand.API.Controllers;
 [Route("api/[controller]/action")]
@@ -13,12 +14,10 @@ public class ProductController : Controller
 {
     Product initProduct = new Product();
     List<Product> products = new List<Product>();
-    private readonly IProductService _productService;
     private readonly IUnitOfWork _unitOfWork;
   
-    public ProductController(IProductService productService, IUnitOfWork unitOfWork)
+    public ProductController(IUnitOfWork unitOfWork)
     {
-        _productService = productService;
         _unitOfWork = unitOfWork;
     }
 
@@ -125,12 +124,20 @@ public class ProductController : Controller
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetProductAsync([FromQuery] string? keywords, [FromQuery] List<string>? sortBy, int PAGE_SIZE, int page = 1)
     {
-        var result = _productService.GetAll(keywords, sortBy, PAGE_SIZE, page);
+        var result = _unitOfWork.Product.GetAllProdcut(keywords, sortBy, PAGE_SIZE, page);
         return new JsonResult(new
         {
             result
         });
     }
+
+    [HttpGet("{id}")]
+    public ActionResult<Product> GetProductByID(int id)
+    {
+        var p = _unitOfWork.Product.GetById(id);
+        return p;
+    }
+
     #endregion
 
     #region DeleteProduct
