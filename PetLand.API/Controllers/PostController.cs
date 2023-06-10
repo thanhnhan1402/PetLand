@@ -6,7 +6,7 @@ using PetLand.BAL.Services.Interfaces;
 using PetLand.DAL.Entities;
 
 namespace PetLand.API.Controllers;
-[Route("api/[controller]/action")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 
 public class PostController : Controller
@@ -41,7 +41,7 @@ public class PostController : Controller
     [HttpPut]
     [ProducesResponseType(typeof(PostViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> EditPosttsync([FromBody] PostViewModel post)
+    public async Task<IActionResult> EditPosttAsync([FromBody] PostViewModel post)
     {
         string errorMessage = "";
         bool status = true;

@@ -31,7 +31,7 @@ namespace PetLand.DAL.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=LAPTOP-3RHVEV37\\FISHBONE;Uid=sa;Pwd=vanhleg123;Database=PetLand");
+                optionsBuilder.UseSqlServer("Server=(local);Uid=sa;Pwd=123;Database=PetLand");
             }
         }
 

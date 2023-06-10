@@ -7,7 +7,7 @@ using PetLand.BAL.Services.Interfaces;
 using PetLand.BAL.Services.Implements;
 
 namespace PetLand.API.Controllers;
-[Route("api/[controller]/action")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 
 public class ProductController : Controller
@@ -20,6 +20,8 @@ public class ProductController : Controller
     {
         _unitOfWork = unitOfWork;
     }
+
+
 
     #region EditProduct
     /// <summary>
@@ -130,14 +132,7 @@ public class ProductController : Controller
             result
         });
     }
-
-    [HttpGet("{id}")]
-    public ActionResult<Product> GetProductByID(int id)
-    {
-        var p = _unitOfWork.Product.GetById(id);
-        return p;
-    }
-
+    
     #endregion
 
     #region DeleteProduct
