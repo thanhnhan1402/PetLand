@@ -24,8 +24,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Reponsitories\" />
-  </ItemGroup>
-
 </Project>
