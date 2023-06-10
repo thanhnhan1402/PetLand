@@ -10,8 +10,9 @@ namespace PetLand.DAL.Reponsitories.Interfaces
     public interface IProductReponsitory
     {
         IQueryable<Product> GetAllProdcut(string? keyword, List<string>? sortby, int PAGE_SIZE, int PAGE_NUMBER);
+        IEnumerable<Product> GetAllProduct();
         Task<bool> Delete(int id);
-        Task<Product> GetById(int id);
+        Product GetById(int id);
         Task<Product> Edit(Product product);
         Task<Product> Add(Product product);
     }

@@ -14,5 +14,5 @@ namespace PetLand.BAL.Services.Interfaces;
         List<ProductViewModel> GetAll(string? keyword, List<string>? sortby, int PAGE_SIZE, int PAGE_NUMBER);
         Task<Product> GetById(long id);
         Task<Product> Edit(ProductViewModel product);
-}
+    }
 

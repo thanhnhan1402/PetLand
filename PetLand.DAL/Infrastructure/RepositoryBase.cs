@@ -14,25 +14,11 @@ namespace DAL.Infrastructure
         private PetLandContext _dbContext;
         protected DbSet<T> _dbSet { get; private set; }
 
-        private IDbFactory DbFactory { get; }
-
-        private PetLandContext DbContext
+        protected RepositoryBase(PetLandContext context)
         {
-            get
-            {
-                if (_dbContext == null)
-                {
-                    _dbContext = DbFactory.Init();
-                }
-                return _dbContext;
-            }
-        }
-
-        protected RepositoryBase(IDbFactory dbFactory)
-        {
-            DbFactory = dbFactory;
+            _dbContext = context;   
                         
-            _dbSet = DbContext.Set<T>();
+            _dbSet = _dbContext.Set<T>();
         }
     }
 }

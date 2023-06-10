@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PetLand.BAL\PetLand.BAL.csproj" />
+    <ProjectReference Include="..\PetLand.DAL\PetLand.DAL.csproj" />
   </ItemGroup>
 
 </Project>
